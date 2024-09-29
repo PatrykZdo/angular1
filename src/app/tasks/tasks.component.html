@@ -1,6 +1,6 @@
 
 @if(isAddingTask){
-    <app-new-task  style="color: aliceblue;" (closed)="onClose()"></app-new-task>
+    <app-new-task  style="color: aliceblue;" [userId]="userId" (closed)="onClose()"></app-new-task>
 }
 
 <section id="tasks">
@@ -14,8 +14,7 @@
     <ul>
         @for(task of selectedUserTasks; track task.id){
             <li>
-                <app-task [task] = "task" (complete)="onCompleteTask(task.id)"></app-task>
-            </li>
+                <app-task [task] = "task"></app-task>
         }
     </ul>
 </section>
