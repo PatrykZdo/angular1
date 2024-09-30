@@ -28,6 +28,14 @@ export class TasksService{
           dueDate: '2024-06-15',
         },
       ]
+
+      constructor(){
+        const tasks = localStorage.getItem('tasks');
+
+        if(tasks){
+          this.tasks = JSON.parse(tasks);
+        }
+      }
     
 
     getUserTasks(userId: string){
@@ -44,9 +52,16 @@ export class TasksService{
               dueDate: taskData.dueDate
             }
           )
+          
+        this.saveTasksToLocalStorage();
     }
 
     removeTask(id: string){
         this.tasks = this.tasks.filter((task) => task.id !== id);
+        this.saveTasksToLocalStorage();
+    }
+
+    private saveTasksToLocalStorage(){
+      localStorage.setItem('tasks', JSON.stringify(this.tasks));
     }
 }
